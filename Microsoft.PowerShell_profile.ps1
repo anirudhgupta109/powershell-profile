@@ -410,7 +410,7 @@ function ll { Get-ChildItem -Path . -Force -Hidden | Format-Table -AutoSize }
 # Git Shortcuts
 function gcp { git cherry-pick -s }
 
-function gcp { git cherry-pick --continue }
+function gcpc { git cherry-pick --continue }
 
 # Quick Access to System Information
 function sysinfo { Get-ComputerInfo }

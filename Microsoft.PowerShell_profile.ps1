@@ -389,15 +389,18 @@ function projects {
 }
 
 # Get valorant ranks
-function getranks()
-{
+function getranks() {
     python C:\Projects\VALORANT-rank-yoinker\main.py
 }
 
 # Run a git pull in all subdirs (useful when there are multiple repositories as submodules)
-function pullallsubdir()
-{
+function pullallsubdir() {
     Get-ChildItem . -exclude *.ps1,temp,*.txt | foreach { cd $_; Write-Host "`r`n" $_; Git pull }
+}
+
+# Open powershell history file
+function getpshistory() {
+    vim (Get-PSReadlineOption).HistorySavePath
 }
 
 # Simplified Process Management

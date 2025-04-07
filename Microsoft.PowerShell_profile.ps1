@@ -397,7 +397,7 @@ function la { Get-ChildItem -Path . -Force | Format-Table -AutoSize }
 function ll { Get-ChildItem -Path . -Force -Hidden | Format-Table -AutoSize }
 
 # Git Shortcuts
-function gcp { git cherry-pick -s }
+function gcp { git cherry-pick -s $args[0]}
 
 function gcpc { git cherry-pick --continue }
 

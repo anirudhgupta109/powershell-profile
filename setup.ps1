@@ -21,8 +21,8 @@ function Test-InternetConnection {
 # Function to install Nerd Fonts
 function Install-NerdFonts {
     param (
-        [string]$FontName = "RobotoMono",
-        [string]$FontDisplayName = "RobotoMono NF"
+        [string]$FontName = "Google Sans Code",
+        [string]$FontDisplayName = "Google Sans Code NF"
         #[string]$Version = "3.2.1"
     )
 
@@ -110,8 +110,8 @@ else {
 # Function to download Oh My Posh theme locally
 function Install-OhMyPoshTheme {
     param (
-        [string]$ThemeName = "cobalt2",
-        [string]$ThemeUrl = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/cobalt2.omp.json"
+        [string]$ThemeName = "negligible",
+        [string]$ThemeUrl = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/$ThemeName.omp.json"
     )
     $profilePath = Get-ProfileDir
     if (!(Test-Path -Path $profilePath)) {
@@ -138,13 +138,13 @@ catch {
 }
 
 # Download Oh My Posh theme locally
-$themeInstalled = Install-OhMyPoshTheme -ThemeName "cobalt2"
+$themeInstalled = Install-OhMyPoshTheme -ThemeName "negligible"
 
 # Font Install
-Install-NerdFonts -FontName "RobotoMono" -FontDisplayName "RobotoMono NF"
+Install-NerdFonts -FontName "Google Sans Code" -FontDisplayName "Google Sane Code NF"
 
 # Final check and message to the user
-if ((Test-Path -Path $PROFILE) -and (winget list --name "OhMyPosh" -e) -and ($fontFamilies -contains "RobotoMono NF") -and $themeInstalled) {
+if ((Test-Path -Path $PROFILE) -and (winget list --name "OhMyPosh" -e) -and ($fontFamilies -contains "Google Sane Code NF") -and $themeInstalled) {
     Write-Host "Setup completed successfully. Please restart your PowerShell session to apply changes."
 } else {
     Write-Warning "Setup completed with errors. Please check the error messages above."
@@ -167,12 +167,4 @@ try {
 }
 catch {
     Write-Error "Failed to install Terminal Icons module. Error: $_"
-}
-# zoxide Install
-try {
-    winget install -e --id ajeetdsouza.zoxide
-    Write-Host "zoxide installed successfully."
-}
-catch {
-    Write-Error "Failed to install zoxide. Error: $_"
 }

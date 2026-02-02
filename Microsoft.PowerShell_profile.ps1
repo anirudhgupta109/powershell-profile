@@ -525,7 +525,7 @@ function getranks() {
 
 # Run a git pull in all subdirs (useful when there are multiple repositories as submodules)
 function pullallsubdir() {
-    Get-ChildItem . -exclude *.ps1, temp, *.txt | foreach { cd $_; Write-Host "`r`n" $_; Git pull }
+    Get-ChildItem . -exclude *.ps1, temp, *.txt | ForEach-Object { Set-Location $_; Write-Host "`r`n" $_; Git pull }
 }
 
 # Open powershell history file
@@ -670,10 +670,10 @@ if (Get-Command -Name "Get-Theme_Override" -ErrorAction SilentlyContinue) {
 }
 else {
     # Oh My Posh initialization with local theme fallback and auto-download
-    $localThemePath = Join-Path (Get-ProfileDir) "cobalt2.omp.json"
+    $localThemePath = Join-Path (Get-ProfileDir) "negligible.omp.json"
     if (-not (Test-Path $localThemePath)) {
         # Try to download the theme file to the detected local path
-        $themeUrl = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/cobalt2.omp.json"
+        $themeUrl = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/negligible.omp.json"
         try {
             Invoke-RestMethod -Uri $themeUrl -OutFile $localThemePath
             Write-Host "Downloaded missing Oh My Posh theme to $localThemePath"
@@ -687,22 +687,7 @@ else {
     }
     else {
         # Fallback to remote theme if local file doesn't exist
-        oh-my-posh init pwsh --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/cobalt2.omp.json | Invoke-Expression
-    }
-}
-
-if (Get-Command zoxide -ErrorAction SilentlyContinue) {
-    Invoke-Expression (& { (zoxide init --cmd z powershell | Out-String) })
-}
-else {
-    Write-Host "zoxide command not found. Attempting to install via winget..."
-    try {
-        winget install -e --id ajeetdsouza.zoxide
-        Write-Host "zoxide installed successfully. Initializing..."
-        Invoke-Expression (& { (zoxide init --cmd z powershell | Out-String) })
-    }
-    catch {
-        Write-Error "Failed to install zoxide. Error: $_"
+        oh-my-posh init pwsh --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/negligible.omp.json | Invoke-Expression
     }
 }
 

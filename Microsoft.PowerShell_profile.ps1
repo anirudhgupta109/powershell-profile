@@ -669,11 +669,12 @@ if (Get-Command -Name "Get-Theme_Override" -ErrorAction SilentlyContinue) {
     Get-Theme_Override
 }
 else {
+    $ompTheme = "1_shell"
     # Oh My Posh initialization with local theme fallback and auto-download
-    $localThemePath = Join-Path (Get-ProfileDir) "negligible.omp.json"
+    $localThemePath = Join-Path (Get-ProfileDir) "$ompTheme.omp.json"
     if (-not (Test-Path $localThemePath)) {
         # Try to download the theme file to the detected local path
-        $themeUrl = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/negligible.omp.json"
+        $themeUrl = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/$ompTheme.omp.json"
         try {
             Invoke-RestMethod -Uri $themeUrl -OutFile $localThemePath
             Write-Host "Downloaded missing Oh My Posh theme to $localThemePath"
@@ -687,7 +688,7 @@ else {
     }
     else {
         # Fallback to remote theme if local file doesn't exist
-        oh-my-posh init pwsh --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/negligible.omp.json | Invoke-Expression
+        oh-my-posh init pwsh --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/$ompTheme.omp.json | Invoke-Expression
     }
 }
 

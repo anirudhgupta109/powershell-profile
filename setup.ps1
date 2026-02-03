@@ -97,7 +97,7 @@ else {
     try {
         $backupPath = Join-Path (Split-Path $PROFILE) "oldprofile.ps1"
         Move-Item -Path $PROFILE -Destination $backupPath -Force
-        Invoke-RestMethod ${gitUrl}/powershell-profile/raw/main/Microsoft.PowerShell_profile.ps1 -OutFile $PROFILE
+        Invoke-RestMethod ${gitUrl}raw/main/Microsoft.PowerShell_profile.ps1 -OutFile $PROFILE
         Write-Host "✅ PowerShell profile at [$PROFILE] has been updated."
         Write-Host "📦 Your old profile has been backed up to [$backupPath]"
         Write-Host "⚠️ NOTE: Please back up any persistent components of your old profile to [$HOME\Documents\PowerShell\Profile.ps1] as there is an updater in the installed profile which uses the hash to update the profile and will lead to loss of changes"
@@ -110,14 +110,14 @@ else {
 # Function to download Oh My Posh theme locally
 function Install-OhMyPoshTheme {
     param (
-        [string]$ThemeName = "negligible",
-        [string]$ThemeUrl = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/$ThemeName.omp.json"
+        [string]$ThemeName = "ohmyzsh-lean_twoline",
+        [string]$ThemeUrl = "${gitUrl}/raw/main/themes/$ThemeName.omp.json"
     )
     $profilePath = Get-ProfileDir
     if (!(Test-Path -Path $profilePath)) {
         New-Item -Path $profilePath -ItemType "directory"
     }
-    $themeFilePath = Join-Path $profilePath "$ThemeName.omp.json"
+    $themeFilePath = Join-Path $profilePath "themes/$ThemeName.omp.json"
     try {
         Invoke-RestMethod -Uri $ThemeUrl -OutFile $themeFilePath
         Write-Host "Oh My Posh theme '$ThemeName' has been downloaded to [$themeFilePath]"
@@ -138,7 +138,7 @@ catch {
 }
 
 # Download Oh My Posh theme locally
-$themeInstalled = Install-OhMyPoshTheme -ThemeName "negligible"
+$themeInstalled = Install-OhMyPoshTheme -ThemeName "ohmyzsh-lean_twoline"
 
 # Font Install
 Install-NerdFonts -FontName "Google Sans Code" -FontDisplayName "Google Sane Code NF"

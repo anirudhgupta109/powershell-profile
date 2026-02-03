@@ -1,0 +1,134 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 2,
+  "final_space": true,
+  "console_title_template": "{{ .Shell }} in {{ .Folder }}",
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "#585858",
+          "template": "╭─"
+        },
+        {
+          "type": "os",
+          "style": "plain",
+          "foreground": "#F1F1F0",
+          "template": "{{ .Icon }} "
+        },
+        {
+          "type": "path",
+          "style": "plain",
+          "foreground": "#0087AF",
+          "properties": {
+            "style": "full"
+          },
+          "template": "{{ .Path }} "
+        },
+        {
+          "type": "git",
+          "style": "plain",
+          "foreground": "#5FD700",
+          "foreground_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}#D7AF00{{ end }}"
+          ],
+          "properties": {
+            "fetch_status": true,
+            "fetch_upstream_icon": true
+          },
+          "template": "on {{ .HEAD }} {{ if gt .Ahead 0 }}<#5FD700>\u21E1{{ .Ahead }}</> {{ end }}{{ if gt .Behind 0 }}<#D7AF00>\u21E3{{ .Behind }}</> {{ end }}{{ $working := add .Working.Modified .Working.Deleted }}{{ if gt $working 0 }}<#D7AF00>!{{ $working }}</> {{ end }}{{ if gt .Working.Untracked 0 }}<#00AFAF>?{{ .Working.Untracked }}</> {{ end }}{{ if gt .Staging.Changed 0 }}<#D7AF00>+{{ .Staging.Changed }}</> {{ end }}"
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "right",
+      "segments": [
+        {
+          "type": "status",
+          "style": "plain",
+          "foreground": "#5FD700",
+          "foreground_templates": ["{{ if gt .Code 0 }}#D70000{{ end }}"],
+          "template": "{{ if eq .Code 0 }}\u2714{{ else }}\u2718{{ end }} "
+        },
+        {
+          "type": "executiontime",
+          "style": "plain",
+          "foreground": "#87875F",
+          "properties": {
+            "threshold": 3000,
+            "style": "round"
+          },
+          "template": "took {{ .FormattedMs }} "
+        },
+        {
+          "type": "python",
+          "style": "plain",
+          "foreground": "#00AFAF",
+          "template": "{{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }} "
+        },
+        {
+          "type": "node",
+          "style": "plain",
+          "foreground": "#5FD700",
+          "template": "{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} "
+        },
+        {
+          "type": "go",
+          "style": "plain",
+          "foreground": "#00AFAF",
+          "template": "go {{ .Full }} "
+        },
+        {
+          "type": "java",
+          "style": "plain",
+          "foreground": "#0087AF",
+          "template": "java {{ .Full }} "
+        },
+        {
+          "type": "aws",
+          "style": "plain",
+          "foreground": "#FF8700",
+          "template": "aws {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} "
+        },
+        {
+          "type": "kubectl",
+          "style": "plain",
+          "foreground": "#AF5FD7",
+          "template": "at {{ .Context }} "
+        },
+        {
+          "type": "time",
+          "style": "plain",
+          "foreground": "#5F8787",
+          "template": "at {{ .CurrentDate | date \"03:04:05 PM\" }}"
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "#585858",
+          "template": "╰─"
+        },
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "#5FD700",
+          "foreground_templates": ["{{ if gt .Code 0 }}#D70000{{ end }}"],
+          "template": "❯"
+        }
+      ]
+    }
+  ]
+}

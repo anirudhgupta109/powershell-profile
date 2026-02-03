@@ -141,10 +141,10 @@ catch {
 $themeInstalled = Install-OhMyPoshTheme -ThemeName "ohmyzsh-lean_twoline"
 
 # Font Install
-Install-NerdFonts -FontName "Google Sans Code" -FontDisplayName "Google Sane Code NF"
+Install-NerdFonts -FontName "Google Sans Code" -FontDisplayName "Google Sans Code NF"
 
 # Final check and message to the user
-if ((Test-Path -Path $PROFILE) -and (winget list --name "OhMyPosh" -e) -and ($fontFamilies -contains "Google Sane Code NF") -and $themeInstalled) {
+if ((Test-Path -Path $PROFILE) -and (winget list --name "OhMyPosh" -e) -and ($fontFamilies -contains "Google Sans Code NF") -and $themeInstalled) {
     Write-Host "Setup completed successfully. Please restart your PowerShell session to apply changes."
 } else {
     Write-Warning "Setup completed with errors. Please check the error messages above."

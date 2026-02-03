@@ -25,7 +25,7 @@
           "type": "path",
           "style": "plain",
           "foreground": "#0087AF",
-          "properties": {
+          "options": {
             "style": "full"
           },
           "template": "{{ .Path }} "
@@ -37,7 +37,7 @@
           "foreground_templates": [
             "{{ if or (.Working.Changed) (.Staging.Changed) }}#D7AF00{{ end }}"
           ],
-          "properties": {
+          "options": {
             "fetch_status": true,
             "fetch_upstream_icon": true
           },
@@ -60,7 +60,7 @@
           "type": "executiontime",
           "style": "plain",
           "foreground": "#87875F",
-          "properties": {
+          "options": {
             "threshold": 3000,
             "style": "round"
           },

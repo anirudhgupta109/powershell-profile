@@ -21,7 +21,7 @@ function Test-InternetConnection {
 # Function to install Nerd Fonts
 function Install-NerdFonts {
     param (
-        [string]$FontName = "Google Sans Code",
+        [string]$FontName = "google-sans-code-nerd-font",
         [string]$FontDisplayName = "Google Sans Code NF"
         #[string]$Version = "3.2.1"
     )
@@ -30,7 +30,7 @@ function Install-NerdFonts {
         [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")
         $fontFamilies = (New-Object System.Drawing.Text.InstalledFontCollection).Families.Name
         if ($fontFamilies -notcontains "${FontDisplayName}") {
-            $fontZipUrl = "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/${FontName}.zip" # Use latest
+            $fontZipUrl = "https://github.com/wylu1037/google-sans-code-nerd-font/releases/latest/download/${FontName}.zip" # Use latest
             $zipFilePath = "$env:TEMP\${FontName}.zip"
             $extractPath = "$env:TEMP\${FontName}"
 
@@ -144,7 +144,9 @@ $themeInstalled = Install-OhMyPoshTheme -ThemeName "ohmyzsh-lean_twoline"
 Install-NerdFonts -FontName "Google Sans Code" -FontDisplayName "Google Sans Code NF"
 
 # Final check and message to the user
-if ((Test-Path -Path $PROFILE) -and (winget list --name "OhMyPosh" -e) -and ($fontFamilies -contains "Google Sans Code NF") -and $themeInstalled) {
+[void] [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")
+$fontFamilies = (New-Object System.Drawing.Text.InstalledFontCollection).Families.Name
+if ((Test-Path -Path $PROFILE) -and (winget list --name "Oh-My-Posh" -e) -and ($fontFamilies -contains "Google Sans Code NF") -and $themeInstalled) {
     Write-Host "Setup completed successfully. Please restart your PowerShell session to apply changes."
 } else {
     Write-Warning "Setup completed with errors. Please check the error messages above."
